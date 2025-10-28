@@ -60,7 +60,7 @@ def solve_distributed_flowshop(
                 start[j, f, m] = s
                 end[j, f, m] = e
                     
-    # order variables o[j1,j2,f]
+    # order variables o[j1,j2,f] d
     o = {}
     if permutation:
         for j1, j2 in combinations(JOBS, 2):
