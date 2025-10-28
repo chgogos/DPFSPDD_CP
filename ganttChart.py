@@ -2,14 +2,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
 def plot_gantt_with_due_dates(problem, jobs_due_date, result):
-    """
-    Δημιουργεί Gantt chart χρησιμοποιώντας:
-    - problem: dict {job: [ptime_m0, ptime_m1, ...]}
-    - jobs_due_date: dict {job: Dj}
-    - result: dict που περιέχει "start_times" και "objective"
-    """
-
-    # Βρες το μέγιστο index εργοστασίου και μηχανής
+    
+    # Find the index of Factories and Machines
     FACTORIES = sorted(set(f for (_, f, _) in result["start_times"].keys()))
     MACHINES = sorted(set(m for (_, _, m) in result["start_times"].keys()))
     JOBS = sorted(problem.keys())
@@ -21,7 +15,7 @@ def plot_gantt_with_due_dates(problem, jobs_due_date, result):
     ylabels = []
     bar_height = 0.35
 
-    # Σχεδίαση bars ανά εργοστάσιο και μηχανή
+    # Draw bars for each Factory and Machine
     for f in FACTORIES:
         for m in MACHINES:
             y = f * (len(MACHINES) + 0.5) + m
@@ -30,7 +24,7 @@ def plot_gantt_with_due_dates(problem, jobs_due_date, result):
 
             for (j, ff, mm), start in result["start_times"].items():
                 if f == ff and m == mm:
-                    dur = problem[j][m]  # παίρνουμε processing time από το dict
+                    dur = problem[j][m]  # processing times
                     ax.barh(
                         y, dur, left=start, height=bar_height,
                         color=colors(j), edgecolor="black"
@@ -40,7 +34,7 @@ def plot_gantt_with_due_dates(problem, jobs_due_date, result):
                         va="center", ha="center", fontsize=8, color="black"
                     )
 
-    # Προσθήκη due dates
+    # Add Due Dates
     for j in JOBS:
         Dj = jobs_due_date[j]
         ax.axvline(Dj, color=colors(j), linestyle="--", linewidth=1)
@@ -53,7 +47,7 @@ def plot_gantt_with_due_dates(problem, jobs_due_date, result):
     ax.set_title(f"Gantt Chart (Total Tardiness = {result['objective']:.0f})")
     ax.grid(True, axis="x", linestyle=":", alpha=0.5)
 
-    # Legend για jobs
+    # Legend for jobs
     patches = [mpatches.Patch(color=colors(j), label=f"Job {j}") for j in JOBS]
     ax.legend(handles=patches, loc="upper right", fontsize=8, ncol=2)
 
