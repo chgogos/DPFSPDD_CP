@@ -1,4 +1,4 @@
-# XXXX
+# New best known results vs. previously best known results
 
 ## Small
 
