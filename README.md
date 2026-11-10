@@ -6,7 +6,7 @@
 
 This repository contains:
 
-* The implementation, using Google ORTools CPSAT, of the Constraint Programming model described in the paper entitled: "New results for the distributed permutation flowshop scheduling problem with due dates" (submitted to the International Journal of Production Research).
+* The implementation, using Google ORTools CPSAT, of the Constraint Programming model described in the paper entitled: "New results for the distributed permutation flowshop scheduling problem with due dates" (submitted to 4OR).
   * [Notebook (solve I_3_12_5_4.txt problem and display solution)](./dpfspdd.ipynb)
 * Datasets ([SMALL](./datasets/small/)/[LARGE](./datasets/large/))
 * Results
